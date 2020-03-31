@@ -9,14 +9,14 @@ script:
   - docker run dmsanthosh/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t dmsanthosh/multi-client ./client
-  - docker build -t dmsanthosh/multi-nginx ./nginx
-  - docker build -t dmsanthosh/multi-server ./server
-  - docker build -t dmsanthosh/multi-worker ./worker
+  - docker build -t dmsanthosh/multi-client:"$TRAVIS_BUILD_NUMBER" ./client
+  - docker build -t dmsanthosh/multi-nginx:"$TRAVIS_BUILD_NUMBER" ./nginx
+  - docker build -t dmsanthosh/multi-server:"$TRAVIS_BUILD_NUMBER" ./server
+  - docker build -t dmsanthosh/multi-worker:"$TRAVIS_BUILD_NUMBER" ./worker
 #Login to Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 #Tag images and push to Docker hub
-  - docker push dmsanthosh/multi-client
-  - docker push dmsanthosh/multi-nginx
-  - docker push dmsanthosh/multi-server
-  - docker push dmsanthosh/multi-worker
+  - docker push dmsanthosh/multi-client:"$TRAVIS_BUILD_NUMBER"
+  - docker push dmsanthosh/multi-nginx:"$TRAVIS_BUILD_NUMBER"
+  - docker push dmsanthosh/multi-server:"$TRAVIS_BUILD_NUMBER"
+  - docker push dmsanthosh/multi-worker:"$TRAVIS_BUILD_NUMBER"

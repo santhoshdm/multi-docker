@@ -14,7 +14,7 @@ after_success:
   - docker build -t dmsanthosh/multi-server ./server
   - docker build -t dmsanthosh/multi-wroker ./worker
 
-##Login to Docker CLI
+#Login to Docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 
 #Tag images and push to Docker hub

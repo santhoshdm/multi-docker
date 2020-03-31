@@ -1,24 +1,22 @@
-sudo: required
-services:
-  - docker
+ sudo: required
+ services:
+   - docker
 
-before_install:
-  - docker build -t dmsanthosh/react-test -f ./client/Dockerfile.test ./client
+ before_install:
+   - docker build -t dmsanthosh/react-test -f ./client/Dockerfile.test ./client
 
-script:
-  - docker run dmsanthosh/react-test npm test -- --coverage
+ script:
+   - docker run dmsanthosh/react-test npm test -- --coverage
 
-after_success:
-  - docker build -t dmsanthosh/multi-client ./client
-  - docker build -t dmsanthosh/multi-nginx ./nginx
-  - docker build -t dmsanthosh/multi-server ./server
-  - docker build -t dmsanthosh/multi-wroker ./worker
-
+ after_success:
+   - docker build -t dmsanthosh/multi-client ./client
+   - docker build -t dmsanthosh/multi-nginx ./nginx
+   - docker build -t dmsanthosh/multi-server ./server
+   - docker build -t dmsanthosh/multi-wroker ./worker
 #Login to Docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-
+   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 #Tag images and push to Docker hub
-  - docker push dmsanthosh/multi-client
-  - docker push dmsanthosh/multi-nginx
-  - docker push dmsanthosh/multi-server
-  - docker push dmsanthosh/multi-worker
+   - docker push dmsanthosh/multi-client
+   - docker push dmsanthosh/multi-nginx
+   - docker push dmsanthosh/multi-server
+   - docker push dmsanthosh/multi-worker

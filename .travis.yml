@@ -22,7 +22,6 @@ after_success:
   - docker push dmsanthosh/multi-worker:"$TRAVIS_BUILD_NUMBER"
 #Deploy only on master branch
 deploy:
-  edge: true
   provider: elasticbeanstalk
   region: "us-east-2"
   app: "multi-docker"
@@ -31,5 +30,5 @@ deploy:
   bucket_path: "docker-multi"
   on:
     branch: master
-    access_key_id: "$AWS_ACCESS_KEY"
-    secret_access_key: "$AWS_SECRET_KEY"
+    access_key_id: $access_key
+    secret_access_key: $secret key

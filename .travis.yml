@@ -21,6 +21,7 @@ after_success:
   - docker push dmsanthosh/multi-server:"$TRAVIS_BUILD_NUMBER"
   - docker push dmsanthosh/multi-worker:"$TRAVIS_BUILD_NUMBER"
 deploy:
+  edge: true
   provider: elasticbeanstalk
   region: "us-east-2"
   app: "multi-docker"
